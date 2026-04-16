@@ -1,36 +1,123 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Web4 Kremenchug Landing Page
 
-## Getting Started
+Одностраничный лендинг для набора 70 бизнес-партнёров в сегмент сети Web4.
 
-First, run the development server:
+## 🚀 Быстрый старт
 
 ```bash
+# 1. Установить зависимости
+npm install
+
+# 2. Создать .env.local (копируем .env.example)
+cp .env.example .env.local
+
+# 3. Добавить Google Sheets API credentials в .env.local
+# (см. инструкции ниже)
+
+# 4. Запустить локально
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Сайт откроется на `http://localhost:3000`
+Админ панель на `http://localhost:3000/admin` (пароль: `admin123`)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📋 Структура
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+├── app/
+│   ├── page.tsx              # Главная страница лендинга
+│   ├── admin/page.tsx        # Админ панель
+│   └── api/
+│       ├── leads/route.ts    # API для контактов → Google Sheet
+│       └── admin/config/     # API админ панели
+├── components/               # Все компоненты лендинга
+├── lib/config.ts            # Конфиг (счётчик, контент)
+└── .env.example             # Переменные окружения
+```
 
-## Learn More
+## ⚙️ Настройка Google Sheets API
 
-To learn more about Next.js, take a look at the following resources:
+1. Перейти на [Google Cloud Console](https://console.cloud.google.com/)
+2. Создать новый проект
+3. Включить **Google Sheets API**
+4. Создать Service Account → JSON ключ
+5. Скачать JSON и извлечь:
+   - `project_id`
+   - `private_key_id`
+   - `private_key`
+   - `client_email`
+   - `client_id`
+   - `client_x509_cert_url`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+6. Добавить в `.env.local`:
+```env
+GOOGLE_PROJECT_ID=your-project-id
+GOOGLE_PRIVATE_KEY_ID=your-key-id
+GOOGLE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n"
+GOOGLE_CLIENT_EMAIL=your-service@project.iam.gserviceaccount.com
+GOOGLE_CLIENT_ID=your-client-id
+GOOGLE_CLIENT_X509_CERT_URL=your-cert-url
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+7. Поделиться Google Sheet с email Service Account
 
-## Deploy on Vercel
+## 🎨 Кастомизация контента
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Всё в `lib/config.ts`:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```typescript
+// Обновить счётчик мест
+bookedPlaces: 12,  // Замените на текущее число
+
+// Изменить преимущества, бонусы, FAQ и т.д.
+BENEFITS, BONUSES, MONEY_SCENARIOS, FAQ
+```
+
+## 📊 Админ панель
+
+Доступна на `/admin`:
+- Вход с паролем (по умолчанию: `admin123`)
+- Обновить счётчик мест (слайдер или числовое поле)
+- Сохранить изменения
+
+**Для production:** сохраняйте счётчик в БД, не в `config.ts`
+
+## 🔗 Деплой
+
+### Vercel (рекомендуется)
+1. Запушить код на GitHub
+2. Подключить в Vercel
+3. Добавить переменные окружения
+4. Deploy
+
+### Собственный сервер
+```bash
+npm run build
+npm start
+```
+
+## 📝 Тестирование
+
+1. **Форма контактов** → проверить Google Sheet
+2. **Админ панель** → обновить счётчик → проверить на лендинге
+3. **Мобильная версия** → все компоненты адаптивные
+
+## 🛠️ Что дальше
+
+- [ ] Подключить CRM (Pipedrive, HubSpot)
+- [ ] Email-уведомления при новой заявке
+- [ ] Аналитика (Google Analytics)
+- [ ] Настроить домен и SSL
+- [ ] SEO оптимизация
+- [ ] Live чат для поддержки
+
+## 💡 Важное
+
+- **Счётчик мест** — обновляйте вручную через админ панель
+- **Контакты** — автоматически сохраняются в Google Sheet
+- **Пароль админ панели** — измените перед production
+- **Google Sheets** — должна быть доступна Service Account
+
+---
+
+**Made with ❤️ for Web4 Kremenchug**
