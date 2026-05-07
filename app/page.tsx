@@ -1,10 +1,25 @@
+'use client';
+
 import Link from 'next/link';
+import { useRef, useState } from 'react';
 
 export default function SplashPage() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [muted, setMuted] = useState(true);
+
+  function toggleSound() {
+    if (!videoRef.current) return;
+    const next = !muted;
+    videoRef.current.muted = next;
+    if (!next) videoRef.current.volume = 1;
+    setMuted(next);
+  }
+
   return (
     <main className="relative min-h-screen bg-black flex flex-col overflow-hidden">
       {/* Looping video background */}
       <video
+        ref={videoRef}
         className="absolute inset-0 w-full h-full object-cover"
         autoPlay
         muted
@@ -16,6 +31,15 @@ export default function SplashPage() {
 
       {/* Dark overlay */}
       <div className="absolute inset-0 bg-black/55" />
+
+      {/* Sound toggle — top right */}
+      <button
+        onClick={toggleSound}
+        className="absolute top-6 right-6 z-20 text-white/60 hover:text-white transition-colors duration-300 text-2xl"
+        aria-label={muted ? 'Увімкнути звук' : 'Вимкнути звук'}
+      >
+        {muted ? '🔇' : '🔊'}
+      </button>
 
       {/* Center text */}
       <div className="relative z-10 flex flex-col items-center flex-1 justify-center text-center text-white px-4">
