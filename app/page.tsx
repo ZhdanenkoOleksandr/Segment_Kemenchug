@@ -47,22 +47,20 @@ export default function SplashPage() {
         {muted ? '🔇' : '🔊'}
       </button>
 
-      {/* WEB 4 — at 1/3 from top, reduced 30% */}
-      <div className="relative z-10 flex justify-center" style={{ paddingTop: '28vh' }}>
-        <div className="flex flex-col items-stretch">
+      {/* WEB 4 + СЕГМЕНТ МЕРЕЖІ — 25vh from top (50% above center) */}
+      <div className="relative z-10 flex justify-center" style={{ paddingTop: '20vh' }}>
+        <div className="flex flex-col">
           <h1 className="text-5xl md:text-6xl font-black tracking-[0.3em] uppercase leading-none text-white whitespace-nowrap">
             WEB 4
           </h1>
-          <p
-            className="text-sm md:text-base uppercase font-bold text-gray-300 mt-2 whitespace-nowrap"
-            style={{ textAlign: 'justify', textAlignLast: 'justify' }}
-          >
-            СЕГМЕНТ МЕРЕЖІ
-          </p>
+          {/* flex justify-between ensures СЕГМЕНТ МЕРЕЖІ spans full width of WEB 4 */}
+          <div className="flex justify-between uppercase font-bold text-gray-300 mt-2 text-sm md:text-base tracking-wider">
+            <span>СЕГМЕНТ</span>
+            <span>МЕРЕЖІ</span>
+          </div>
         </div>
       </div>
 
-      {/* Spacer pushes КРЕМЕНЧУК + button to bottom half */}
       <div className="flex-1" />
 
       {/* КРЕМЕНЧУК — between video and button */}
