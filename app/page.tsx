@@ -2,17 +2,22 @@ import Link from 'next/link';
 
 export default function SplashPage() {
   return (
-    <main
-      className="relative min-h-screen bg-black flex flex-col overflow-hidden"
-      style={{
-        backgroundImage: 'url(/defender.jpg)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-      }}
-    >
-      <div className="absolute inset-0 bg-black/50" />
+    <main className="relative min-h-screen bg-black flex flex-col overflow-hidden">
+      {/* Looping video background */}
+      <video
+        className="absolute inset-0 w-full h-full object-cover"
+        autoPlay
+        muted
+        loop
+        playsInline
+      >
+        <source src="/bg.mp4" type="video/mp4" />
+      </video>
 
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-black/55" />
+
+      {/* Center text */}
       <div className="relative z-10 flex flex-col items-center flex-1 justify-center text-center text-white px-4">
         <h1 className="text-7xl md:text-9xl font-black tracking-[0.3em] uppercase mb-6 leading-none">
           WEB 4
@@ -25,6 +30,7 @@ export default function SplashPage() {
         </p>
       </div>
 
+      {/* Bottom button */}
       <div className="relative z-10 flex justify-center pb-16">
         <Link
           href="/landing"
