@@ -1,46 +1,38 @@
-import Hero from '@/components/Hero';
-import Benefits from '@/components/Benefits';
-import MoneyScenario from '@/components/MoneyScenario';
-import BonusTable from '@/components/BonusTable';
-import YourRole from '@/components/YourRole';
-import Steps from '@/components/Steps';
-import LeadForm from '@/components/LeadForm';
-import FAQ from '@/components/FAQ';
+import Link from 'next/link';
 
-export default function Home() {
+export default function SplashPage() {
   return (
-    <main className="bg-white">
-      {/* Header */}
-      <header className="bg-white border-b">
-        <div className="max-w-4xl mx-auto px-4 py-4">
-          <div className="text-sm font-bold">Web4 Кременчуга</div>
-        </div>
-      </header>
+    <main
+      className="relative min-h-screen bg-black flex flex-col overflow-hidden"
+      style={{
+        backgroundImage: 'url(/defender.jpg)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+      }}
+    >
+      <div className="absolute inset-0 bg-black/50" />
 
-      {/* Sections */}
-      <Hero />
-      <Benefits />
-      <MoneyScenario />
-      <BonusTable />
-      <YourRole />
-      <Steps />
-      <LeadForm />
-      <FAQ />
+      <div className="relative z-10 flex flex-col items-center flex-1 justify-center text-center text-white px-4">
+        <h1 className="text-7xl md:text-9xl font-black tracking-[0.3em] uppercase mb-6 leading-none">
+          WEB 4
+        </h1>
+        <p className="text-base md:text-xl tracking-[0.4em] uppercase text-gray-400 mb-3 font-light">
+          сегмент мережі
+        </p>
+        <p className="text-2xl md:text-4xl tracking-[0.15em] uppercase font-medium text-white/90">
+          Кременчук
+        </p>
+      </div>
 
-      {/* Footer */}
-      <footer className="bg-black text-white py-12 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <p className="mb-4">
-            Партнёр компании <span className="font-bold">Sholia</span>
-          </p>
-          <p className="text-sm text-gray-400">
-            © 2026 Web4 Segment Kremenchug. Все права защищены.
-          </p>
-          <p className="text-xs text-gray-500 mt-4">
-            Вопросы? Напишите нам или позвоните.
-          </p>
-        </div>
-      </footer>
+      <div className="relative z-10 flex justify-center pb-16">
+        <Link
+          href="/landing"
+          className="px-20 py-4 border border-white/70 text-white text-sm tracking-[0.3em] uppercase hover:bg-white hover:text-black transition-all duration-500 font-light"
+        >
+          Початок
+        </Link>
+      </div>
     </main>
   );
 }
