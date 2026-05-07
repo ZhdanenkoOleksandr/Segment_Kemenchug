@@ -21,6 +21,8 @@ export default function SplashPage() {
     setMuted(next);
   }
 
+  const subtitle = 'СЕГМЕНТ МЕРЕЖІ'.split('');
+
   return (
     <main className={`${montserrat.className} relative min-h-screen bg-black flex flex-col overflow-hidden`}>
 
@@ -47,23 +49,26 @@ export default function SplashPage() {
         {muted ? '🔇' : '🔊'}
       </button>
 
-      {/* WEB 4 + СЕГМЕНТ МЕРЕЖІ — 25vh from top (50% above center) */}
-      <div className="relative z-10 flex justify-center" style={{ paddingTop: '20vh' }}>
+      {/* WEB 4 + СЕГМЕНТ МЕРЕЖІ — поднято до 8vh */}
+      <div className="relative z-10 flex justify-center" style={{ paddingTop: '8vh' }}>
         <div className="flex flex-col">
           <h1 className="text-5xl md:text-6xl font-black tracking-[0.3em] uppercase leading-none text-white whitespace-nowrap">
             WEB 4
           </h1>
-          {/* flex justify-between ensures СЕГМЕНТ МЕРЕЖІ spans full width of WEB 4 */}
-          <div className="flex justify-between uppercase font-bold text-gray-300 mt-2 text-sm md:text-base tracking-wider">
-            <span>СЕГМЕНТ</span>
-            <span>МЕРЕЖІ</span>
+          {/* Кожна буква — окремий flex-item, перша під W, остання під 4 */}
+          <div className="flex justify-between mt-2 text-sm md:text-base font-bold text-gray-300 uppercase">
+            {subtitle.map((char, i) => (
+              <span key={i} className={char === ' ' ? 'w-2' : ''}>
+                {char}
+              </span>
+            ))}
           </div>
         </div>
       </div>
 
       <div className="flex-1" />
 
-      {/* КРЕМЕНЧУК — between video and button */}
+      {/* КРЕМЕНЧУК */}
       <div className="relative z-10 text-center mb-6">
         <p className="text-2xl md:text-3xl tracking-[0.2em] uppercase font-medium text-white/90">
           КРЕМЕНЧУК
