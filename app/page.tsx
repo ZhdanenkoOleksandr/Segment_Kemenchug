@@ -17,19 +17,24 @@ export default function SplashPage() {
 
   return (
     <main className="relative min-h-screen bg-black flex flex-col overflow-hidden">
-      <video
-        ref={videoRef}
-        className="absolute inset-0 w-full h-full object-cover"
-        autoPlay
-        muted
-        loop
-        playsInline
-      >
-        <source src="/bg.mp4" type="video/mp4" />
-      </video>
+      {/* Black background */}
+      <div className="absolute inset-0 bg-black" />
 
-      <div className="absolute inset-0 bg-black/55" />
+      {/* Video centered, 30% of screen size */}
+      <div className="absolute inset-0 flex items-center justify-center">
+        <video
+          ref={videoRef}
+          className="w-[30vw] h-[30vh] object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+        >
+          <source src="/bg.mp4" type="video/mp4" />
+        </video>
+      </div>
 
+      {/* Sound toggle */}
       <button
         onClick={toggleSound}
         className="absolute top-6 right-6 z-20 text-white/60 hover:text-white transition-colors duration-300 text-lg"
@@ -38,6 +43,7 @@ export default function SplashPage() {
         {muted ? '🔇' : '🔊'}
       </button>
 
+      {/* Center text */}
       <div className="relative z-10 flex flex-col items-center flex-1 justify-center text-center text-white px-4">
         <h1 className="text-3xl md:text-4xl font-black tracking-[0.3em] uppercase mb-2 leading-none">
           WEB 4
@@ -50,6 +56,7 @@ export default function SplashPage() {
         </p>
       </div>
 
+      {/* Bottom button */}
       <div className="relative z-10 flex justify-center pb-16">
         <Link
           href="/landing"
